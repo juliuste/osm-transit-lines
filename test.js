@@ -72,6 +72,5 @@ tape('osm-transit-lines', async t => {
 		t.doesNotThrow(() => validate(bus114Stop), 'route stop valid')
 	}
 
-	t.ok(osmTransitLines)
 	t.end()
 })
