@@ -28,7 +28,11 @@ const boundingBox = {
 	east: 13.7606105539
 }
 
-osmTransitLines(bbox) // returns a Promise
+const options = {
+	logging: false // logs current request count to stderr when enabled
+}
+
+osmTransitLines(bbox, options) // returns a Promise
 	.then(console.log)
 	.catch(console.error)
 ```
