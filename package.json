@@ -1,0 +1,53 @@
+{
+	"name": "osm-transit-lines",
+	"version": "0.0.0",
+	"description": "Fetch public transit lines from OpenStreetMap for a given area (bounding box).",
+	"keywords": [
+		"lines",
+		"openstreetmap",
+		"osm",
+		"public",
+		"transit",
+		"transport",
+		"train",
+		"railway",
+		"bus",
+		"tram"
+	],
+	"homepage": "https://github.com/juliuste/osm-transit-lines",
+	"bugs": "https://github.com/juliuste/osm-transit-lines/issues",
+	"repository": "juliuste/osm-transit-lines",
+	"license": "ISC",
+	"author": "Julius Tens <mail@juliustens.eu>",
+	"files": [
+		"lib/*"
+	],
+	"main": "lib/index.js",
+	"scripts": {
+		"check-deps": "depcheck",
+		"fix": "eslint --fix lib test.js",
+		"lint": "eslint lib test.js",
+		"prepublishOnly": "npm test",
+		"test": "npm run lint && npm run check-deps && node test"
+	},
+	"dependencies": {
+		"@derhuerst/query-overpass": "^1.0.1",
+		"german-states-bbox": "^1.1.0",
+		"lodash": "^4.17.11"
+	},
+	"devDependencies": {
+		"depcheck": "^0.6.11",
+		"eslint": "^5.10.0",
+		"eslint-config-standard": "^12.0.0",
+		"eslint-plugin-import": "^2.14.0",
+		"eslint-plugin-node": "^8.0.0",
+		"eslint-plugin-promise": "^4.0.1",
+		"eslint-plugin-standard": "^4.0.0",
+		"tape": "^4.9.1",
+		"tape-promise": "^4.0.0",
+		"validate-fptf": "^2.1.1"
+	},
+	"engines": {
+		"node": ">=8"
+	}
+}
