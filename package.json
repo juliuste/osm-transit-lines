@@ -1,6 +1,6 @@
 {
 	"name": "osm-transit-lines",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Fetch public transit lines from OpenStreetMap for a given area (bounding box).",
 	"keywords": [
 		"lines",
