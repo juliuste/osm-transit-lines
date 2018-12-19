@@ -35,12 +35,14 @@ tape('osm-transit-lines', async t => {
 	}
 
 	// Tram 12, mapped with route_master
-	const tram12Candidates = lines.filter(l => l.ref === '12' && l.operator === 'BVG' && l.transitMode === 'tram')
+	const tram12Candidates = lines.filter(l => l.ref === '12' && l.network === 'Verkehrsverbund Berlin-Brandenburg' && l.transitMode === 'tram')
 	t.ok(tram12Candidates.length === 1, 'Tram 12 line count')
 	const [tram12] = tram12Candidates
 	t.ok(tram12.type === 'line', 'line type')
 	t.ok(tram12.colour === '#996699', 'line colour')
 	t.ok(tram12.transitMode === 'tram', 'line transitMode')
+	// routes have operator Berliner Verkehrsbetriebe, line has operator BVG, this verifies the syncinc
+	t.ok(tram12.operator === 'Berliner Verkehrsbetriebe', 'line attributes synced') // @todo improve testing
 	t.ok(tram12.routes.length === 2, 'line routes length')
 	const [tram12Route] = tram12.routes
 	t.ok(tram12Route.ref === '12', 'route ref')

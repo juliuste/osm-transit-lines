@@ -39,7 +39,14 @@ osmTransitLines(bbox, options) // returns a Promise
 
 Note that - depending on your bounding box - the request might take quite long, even some minutes. You should save/cache the result of this query for some time and refresh the data after some interval you deep appropriate (depending on how fast people might change line information on OSM 😜). Also, the request body is handled in-memory at the time, so the process might get killed if you query a giant bounding box and don't have enough memory.
 
-The method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/promise) that will resolve in a list of lines (that match `route_master` relations in OSM, as well as `route` relations that don't have a `route_master` parent relation) which in turn contain a list of routes (corresponding to normal `route` relations in OSM) which in turn contain stopLocations, a list of coordinates representing the route's stops. All keys except for `id`, `type`, `stopLocations` and `routes` are OSM attributes. Note that the attribute `transitMode` contains the `route_master` or `route` mode from OpenStreetMap (they represent the same data type but have different attribute names depending on if they're part of a `route` or a `route_master`), which is why I introduced the `transitMode` attribute to allow you to use the same logic to handle line and route modes.
+The method returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/promise) that will resolve in a list of lines (that match `route_master` relations in OSM) which in turn contain a list of routes (corresponding to normal `route` relations in OSM) which in turn contain stopLocations, a list of coordinates representing the route's stops. All attributes except for `id`, `type`, `stopLocations` and `routes` are copied from OSM.
+
+Note that this module additionally alters the data to enhance quality in the following ways:
+- Creates an additional attribute `transitMode` which contains the `route_master` or `route` mode from OpenStreetMap (they represent the same data type but have different attribute names depending on if they're part of a `route` or a `route_master`)
+- Creates additional lines from `route` relations that don't have a `route_master` parent relation and inserts the same route as the only entry in that line's `routes` attribute.
+- Harmonizes the some attributes (`network`, `wikidata`, `colour`, `operator`, `ref`, `transitMode`) between lines and routes in the following ways:
+	- Do all routes/line contain the same value *or null* for this attribute? -> Copy the value to all routes/line (effectively adding information for those that had `null` before)
+	- Do all routes contain the same value *or null*, but the line has a different value? -> Copy the value to all routes (effectively adding information for those that had `null` before) *and overwrite the current value in the line*.
 
 Example output for Berlin:
 
