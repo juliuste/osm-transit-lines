@@ -29,10 +29,11 @@ const boundingBox = {
 }
 
 const options = {
-	logging: false // logs current request count to stderr when enabled
+	logging: false, // logs current request count to stderr when enabled
+	wikidata: false // fetch claims for lines (not routes) that have a wikidata attribute into line.wikidataClaims
 }
 
-osmTransitLines(bbox, options) // returns a Promise
+osmTransitLines(bbox, { wikidata: true }) // returns a Promise
 	.then(console.log)
 	.catch(console.error)
 ```
@@ -130,6 +131,12 @@ Example output for Berlin:
 	"transitMode": "subway",
 	"type": "line",
 	"wikidata": "Q99729",
+	"wikidataClaims": {
+		"P154": ["Berlin U8.svg"],
+		"P373": ["U-Bahnlinie U8 (Berlin)"],
+		"P465": ["00609E"] // line color
+		// …
+	},
 	"wikipedia": "de:U-Bahn-Linie 8 (Berlin)"
 }
 ```

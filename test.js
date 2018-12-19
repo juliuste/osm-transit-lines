@@ -12,7 +12,7 @@ const osmTransitLines = require('.')
 tape('osm-transit-lines', async t => {
 	const bbox = { south: berlin.minLat, west: berlin.minLon, north: berlin.maxLat, east: berlin.maxLon }
 
-	const lines = await osmTransitLines(bbox)
+	const lines = await osmTransitLines(bbox, { wikidata: true })
 	t.ok(lines.length >= 10, 'lines count')
 
 	// U8 mapped with route_master
@@ -22,6 +22,9 @@ tape('osm-transit-lines', async t => {
 	t.ok(u8.type === 'line', 'line type')
 	t.ok(u8.colour === '#055A99', 'line colour')
 	t.ok(u8.transitMode === 'subway', 'line transitMode')
+	t.ok(u8.wikidata === 'Q99729', 'line wikidata')
+	t.ok(u8.wikidataClaims, 'line wikidata claims')
+	t.ok(Array.isArray(u8.wikidataClaims.P465) && u8.wikidataClaims.P465[0] === '00609E', 'like wikidata claims line-color')
 	t.ok(u8.routes.length === 2, 'line routes length')
 	const [u8Route] = u8.routes
 	t.ok(u8Route.ref === 'U8', 'route ref')
