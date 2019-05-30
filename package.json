@@ -36,7 +36,7 @@
 		"german-states-bbox": "^1.1.0",
 		"lodash": "^4.17.11",
 		"p-queue": "^3.0.0",
-		"wikidata-sdk": "^5.15.9"
+		"wikidata-sdk": "^7.0.1"
 	},
 	"devDependencies": {
 		"depcheck": "^0.6.11",
