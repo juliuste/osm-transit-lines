@@ -34,7 +34,7 @@
 		"@derhuerst/query-overpass": "^1.0.1",
 		"fetch-ponyfill": "^6.0.2",
 		"german-states-bbox": "^1.1.0",
-		"lodash": "^4.17.11",
+		"lodash": "^4.17.12",
 		"p-queue": "^3.0.0",
 		"wikidata-sdk": "^5.15.9"
 	},
